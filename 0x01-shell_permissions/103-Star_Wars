@@ -1,2 +1,3 @@
 #!/bin/bash
-open StarWars IV
+telnet towel.blinkenlights.nl
+
