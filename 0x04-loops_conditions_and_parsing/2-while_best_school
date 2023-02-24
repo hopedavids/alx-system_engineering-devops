@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+# uses while loop to print 10 times
 
-count = 1
-while [ $count -le 10 ]
+i=10
+
+while [ $i -gt 0 ]
 do
-  echo "Best School
-  count=$((count+1))
-done"
+    echo "Holberton School"
+    i=$((i - 1))
+done
