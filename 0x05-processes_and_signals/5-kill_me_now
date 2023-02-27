@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# script that displays To infinity and beyond indefinitely.
+# shellcheck disable=SC2009
+
+ kill -SIGTERM "$(pgrep --full 4-to_infinity_and_beyond)"
