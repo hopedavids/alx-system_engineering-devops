@@ -1,12 +1,9 @@
 #!/usr/bin/env bash
-sudo bash -c "cat > /etc/nginx/conf.d/redirect_me.conf << EOF
-server {
-    listen 80;
-    server_name example.com;
-
-    location /redirect_me {
-        return 301 https://example.com/new_page;
-    }
-}
-EOF"
-
+# redirection must be a "301 moved permanently"
+apt-get update
+apt-get -y install nginx
+service nginx start
+new_string="rewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;"
+file="/etc/nginx/sites-available/default"
+sed -i "26i $new_string" $file
+service nginx restart && service nginx reload
