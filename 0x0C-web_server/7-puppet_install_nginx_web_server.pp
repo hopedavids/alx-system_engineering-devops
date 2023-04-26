@@ -1,41 +1,23 @@
-# Install Nginx package
+# Install and config the nginx
 package { 'nginx':
   ensure => installed,
+  name   => 'nginx',
 }
 
-# Configure Nginx to listen on port 80
-file { '/etc/nginx/sites-available/default':
-  ensure  => present,
-  owner   => 'root',
-  group   => 'root',
-  mode    => '0644',
-  content => "
-server {
-    listen 80;
-    server_name localhost;
-
-    location / {
-        echo 'Hello World!';
-    }
-
-    location /redirect_me {
-        return 301 https://example.com/new_page;
-    }
-}
-",
+file { '/var/www/html/index.html':
+  content => 'Holberton School',
+  path    => '/var/www/html/index.html'
 }
 
-# Enable the default Nginx site
-file { '/etc/nginx/sites-enabled/default':
-  ensure => 'link',
-  target => '/etc/nginx/sites-available/default',
-  notify => Service['nginx'],
+file_line { 'title':
+  ensure   => present,
+  path     => '/etc/nginx/sites-available/default',
+  after    => 'server_name _;',
+  line     => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
+  multiple => true
 }
 
-# Restart Nginx after configuration changes
 service { 'nginx':
-  ensure => running,
-  enable => true,
-  require => File['/etc/nginx/sites-enabled/default'],
+  ensure  => running,
+  require => Package['nginx'],
 }
-
