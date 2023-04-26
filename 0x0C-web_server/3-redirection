@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 sudo bash -c "cat > /etc/nginx/conf.d/redirect_me.conf << EOF
 server {
     listen 80;
