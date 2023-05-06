@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Nginx should listern on port 80
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+sudo service nginx reload
